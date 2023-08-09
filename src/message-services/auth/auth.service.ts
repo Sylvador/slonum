@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { RegisterResponseDto, LoginDto } from '../../dto';
 import { RoleEnum } from '../../enums';
 import { IUser } from '../../interfaces';
-import { CustomLoggerService } from '../../logger/custom-logger.service';
 import { AuthData, AuthMetaData, Tokens } from '../../types';
 import { AuthMessagePatterns } from './auth-message.patterns';
 import { AuthMessageService } from './auth-message.service';
@@ -11,7 +10,6 @@ import { IProvideUserRole } from './interfaces/provide-role.interface';
 import { IUpdateEmail } from './interfaces/update-email.interface';
 import { IUpdateUser } from './interfaces/update-user.interface';
 
-const logger = new CustomLoggerService();
 @Injectable()
 export class AuthService {
   constructor(protected readonly authMessageService: AuthMessageService) {}

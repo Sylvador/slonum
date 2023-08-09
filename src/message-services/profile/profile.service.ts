@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ProfileMessageService } from './profile-message.service';
 import { RegisterDto, RegisterResponseDto, UpdateProfileDto } from '../../dto';
 import { IProfile } from '../../interfaces';
-import { ProfileMessagePatterns } from './profile.message-patterns';
+import { ProfileMessagePatterns } from './profile-message.patterns';
 import { JwtPayload } from '../../types';
 @Injectable()
 export class ProfileService {
