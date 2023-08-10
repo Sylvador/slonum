@@ -38,23 +38,23 @@
 Базовый класс сервисов сообщений
 ### Auth
 - AuthModule
-- [AuthService](https://github.com/Sylvador/slonum/edit/main/README.md#authservice)
+- [AuthService](https://github.com/Sylvador/slonum#authservice)
 - AuthMessagePatterns
 ### UserInfo
 - ProfileModule
-- [ProfileService](https://github.com/Sylvador/slonum/edit/main/README.md#profileservice)
+- [ProfileService](https://github.com/Sylvador/slonum#profileservice)
 - ProfileMessagePatterns
 ## Loggers
 - LoggerModule
 - CustomLoggerService
-- [RpcExceptionLogger](https://github.com/Sylvador/slonum/edit/main/README.md#rpcexceptionlogger)
+- [RpcExceptionLogger](https://github.com/Sylvador/slonum#rpcexceptionlogger)
 ## ExceptionFilters
-- [HttpExceptionFilter](https://github.com/Sylvador/slonum/edit/main/README.md#httpexceptionlogger)
-- [RpcExceptionFilter](https://github.com/Sylvador/slonum/edit/main/README.md#rpcexceptionfilter)
+- [HttpExceptionFilter](https://github.com/Sylvador/slonum#httpexceptionlogger)
+- [RpcExceptionFilter](https://github.com/Sylvador/slonum#rpcexceptionfilter)
 ## Decorators
-- [Auth](https://github.com/Sylvador/slonum/edit/main/README.md#auth)
-- [GetCurrentUser](https://github.com/Sylvador/slonum/edit/main/README.md#getcurrentuser)
-- [MetaData](https://github.com/Sylvador/slonum/edit/main/README.md#metadata)
+- [Auth](https://github.com/Sylvador/slonum#auth)
+- [GetCurrentUser](https://github.com/Sylvador/slonum#getcurrentuser)
+- [MetaData](https://github.com/Sylvador/slonum#metadata)
 ## Types
 ### AuthData
 Данные сущности User в сервисе slonum-auth
@@ -473,7 +473,7 @@ export function Auth(...roles: string[]) {
 ```
 ### GetCurrentUser
 \<PayloadType\> — Если передать тип токена, то IDE при указании параметра `data` покажет его ключи<br>
-Параметр `data` — ключ [JwtPayload](https://github.com/Sylvador/slonum/edit/main/README.md#jwtpayload) | [JwtPayloadRT](https://github.com/Sylvador/slonum/edit/main/README.md#jwtpayloadrt)<br>
+Параметр `data` — ключ [JwtPayload](https://github.com/Sylvador/slonum#jwtpayload) | [JwtPayloadRT](https://github.com/Sylvador/slonum#jwtpayloadrt)<br>
 Возвращает декодированный токен, если не передан `data`<br>
 Возвращает значение `data` из токена, если передан
 ```typescript
@@ -489,7 +489,7 @@ export const GetCurrentUser = createParamDecorator(
 );
 ```
 ### Metadata
-Возвращает [AuthMetaData](https://github.com/Sylvador/slonum/edit/main/README.md#authmetadata)
+Возвращает [AuthMetaData](https://github.com/Sylvador/slonum#authmetadata)
 ```typescript
 export const MetaData = createParamDecorator((data: unknown, ctx: ExecutionContext): AuthMetaData => {
   const req = ctx.switchToHttp().getRequest();
