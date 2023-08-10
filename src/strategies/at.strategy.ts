@@ -9,11 +9,10 @@ import { CommonModuleOptions } from '../interfaces/common-module-options.interfa
 @Injectable()
 export class AtStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor(@Inject(MODULE_OPTIONS_TOKEN) { ACCESS_SECRET }: CommonModuleOptions) {
-    console.log('ACCESS_SECRET', process.env[ACCESS_SECRET]);
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([ExtractJwt.fromAuthHeaderAsBearerToken(), AtStrategy.extractJwtFromCookies]),
       ignoreExpiration: false,
-      secretOrKey: process.env[ACCESS_SECRET] || 'ACCESS_SECRET',
+      secretOrKey: ACCESS_SECRET || 'ACCESS_SECRET',
     });
   }
 
