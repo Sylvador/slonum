@@ -1,7 +1,7 @@
 import { applyDecorators, SetMetadata, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
-import { ROLES_KEY } from '../guards/roles.decorator';
 import { AtGuard, RolesGuard } from '../guards';
+import { ROLES_KEY } from './roles.decorator';
 
 export const ADMIN = 'ADMIN';
 /**

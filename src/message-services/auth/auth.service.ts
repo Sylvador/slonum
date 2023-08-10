@@ -18,20 +18,12 @@ export class AuthService {
     return this.authMessageService.send({ authData, metaData, role }, AuthMessagePatterns.REGISTER);
   }
 
-  async login(loginDto: LoginDto): Promise<Tokens> {
-    return this.authMessageService.send(loginDto, AuthMessagePatterns.LOGIN);
-  }
-
   async logout(refreshToken: string): Promise<number> {
     return this.authMessageService.send({ refreshToken }, AuthMessagePatterns.LOGOUT);
   }
 
   async refreshTokens(refreshTokenDto: RefreshTokenDto): Promise<Tokens> {
     return this.authMessageService.send(refreshTokenDto, AuthMessagePatterns.REFRESH_TOKENS);
-  }
-
-  async registerChild(childAuthData: AuthData): Promise<IUser> {
-    return this.authMessageService.send(childAuthData, AuthMessagePatterns.REGISTER_CHILD);
   }
 
   async updateUser(updateUserDto: IUpdateUser): Promise<IUser> {

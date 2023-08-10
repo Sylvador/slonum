@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { AuthMessagePatterns } from './auth-message.patterns';
-import { BaseMessageService } from '../../utils';
+import { BaseMessageService } from '../base-message.service';
 
 @Injectable()
 export class AuthMessageService extends BaseMessageService {

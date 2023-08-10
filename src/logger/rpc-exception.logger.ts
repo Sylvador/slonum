@@ -7,12 +7,12 @@ const logger = new CustomLoggerService();
 /**
  * Логгер для ошибок в rabbit контроллерах
  * 
- * `@UseFilters(new RpcExceptionFilterLogger())`
+ * `@UseFilters(new RpcExceptionLogger())`
  * 
  * Просто выводит логи ошибок
  */
 @Catch(RpcException)
-export class RpcExceptionFilterLogger implements RpcExceptionFilter<RpcException> {
+export class RpcExceptionLogger implements RpcExceptionFilter<RpcException> {
   catch(exception: RpcException, host: ArgumentsHost) {
     logger.error(exception);
     return throwError(() => exception.getError());
