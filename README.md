@@ -123,7 +123,8 @@ async registerParticipant(@Res() res: Response, @Body() registerParticipantDto: 
 - [RpcExceptionFilter](https://github.com/Sylvador/slonum#rpcexceptionfilter)
 ## [Decorators](https://github.com/Sylvador/slonum#decorators-1)
 - [Auth](https://github.com/Sylvador/slonum#auth-1)
-- [GetCurrentUser](https://github.com/Sylvador/slonum#getcurrentuser)
+- [GetJwtPayload](https://github.com/Sylvador/slonum#getjwtpayload)
+- [GetRtJwtPayload](https://github.com/Sylvado/slonum#getrtjwtpayload)
 - [MetaData](https://github.com/Sylvador/slonum#metadata)
 ## Types
 ### AuthData
@@ -572,18 +573,27 @@ export function Auth(...roles: string[]) {
     return this.profileService.getCurrentUserById(id);
   }
 ```
-### GetCurrentUser
-\<PayloadType\> — Если передать тип токена, то IDE при указании параметра `data` покажет его ключи<br>
-Параметр `data` — ключ [JwtPayload](https://github.com/Sylvador/slonum#jwtpayload) | [JwtPayloadRT](https://github.com/Sylvador/slonum#jwtpayloadrt)<br>
+### GetJwtPayload
+Параметр `data` — ключ [JwtPayload](https://github.com/Sylvador/slonum#jwtpayload)<br>
 Возвращает декодированный токен, если не передан `data`<br>
 Возвращает значение `data` из токена, если передан
 ```typescript
-export const GetCurrentUser = createParamDecorator(
-  <PayloadType extends JwtPayloadRT | JwtPayload>(
-    data: keyof PayloadType | undefined,
-    context: ExecutionContext,
-  ): PayloadType | PayloadType[keyof PayloadType] => {
-    const user = context.switchToHttp().getRequest().user as PayloadType;
+export const GetJwtPayload = createParamDecorator(
+  (data: keyof JwtPayload | undefined, context: ExecutionContext): JwtPayload | JwtPayload[keyof JwtPayload] => {
+    const user = context.switchToHttp().getRequest().user;
+    if (!data) return user;
+    return user[data];
+  },
+);
+```
+### GetRtJwtPayload
+Параметр `data` — ключ [JwtPayloadRT](https://github.com/Sylvador/slonum#jwtpayloadrt)<br>
+Возвращает декодированный токен, если не передан `data`<br>
+Возвращает значение `data` из токена, если передан
+```typescript
+export const GetRtJwtPayload = createParamDecorator(
+  (data: keyof JwtPayloadRT | undefined, context: ExecutionContext): JwtPayloadRT | JwtPayloadRT[keyof JwtPayloadRT] => {
+    const user = context.switchToHttp().getRequest().user;
     if (!data) return user;
     return user[data];
   },
