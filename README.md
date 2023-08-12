@@ -124,7 +124,7 @@ async registerParticipant(@Res() res: Response, @Body() registerParticipantDto: 
 ## [Decorators](https://github.com/Sylvador/slonum#decorators-1)
 - [Auth](https://github.com/Sylvador/slonum#auth-1)
 - [GetJwtPayload](https://github.com/Sylvador/slonum#getjwtpayload)
-- [GetRtJwtPayload](https://github.com/Sylvado/slonum#getrtjwtpayload)
+- [GetRtJwtPayload](https://github.com/Sylvador/slonum#getrtjwtpayload)
 - [MetaData](https://github.com/Sylvador/slonum#metadata)
 ## Types
 ### AuthData
