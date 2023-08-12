@@ -7,7 +7,7 @@ import { JwtPayload } from '../../types';
 @Injectable()
 export class ProfileService {
   constructor(private profileMessageService: ProfileMessageService) {}
-  
+
   async register(createUserInfoDto: RegisterDto): Promise<RegisterResponseDto> {
     return this.profileMessageService.send(createUserInfoDto, ProfileMessagePatterns.REGISTER);
   }

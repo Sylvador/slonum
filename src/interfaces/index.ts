@@ -6,4 +6,3 @@ export * from './user.interface';
 export * from './rpc-exception.interface';
 export * from './refresh-token.inteface';
 export * from './request.interface';
-export * from './common-module-options.interface';

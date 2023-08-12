@@ -6,9 +6,9 @@ const logger = new CustomLoggerService();
 
 /**
  * Логгер для ошибок в rabbit контроллерах
- * 
+ *
  * `@UseFilters(new RpcExceptionLogger())`
- * 
+ *
  * Просто выводит логи ошибок
  */
 @Catch(RpcException)

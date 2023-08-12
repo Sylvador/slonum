@@ -1,6 +1,5 @@
 export * from './common.module';
 export * from './common.service';
-export * from './common.module-definition';
 export * from './decorators';
 export * from './interfaces';
 export * from './utils';
@@ -14,3 +13,4 @@ export * from './dto';
 export * from './logger';
 export * from './middlewares';
 export * from './pipes';
+export * from './modules';

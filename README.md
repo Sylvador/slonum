@@ -1,12 +1,80 @@
-# @slonum/common
-## Types
+# Краткое руководство
+## Ключевые компоненты
+- ### Модуль авторизации
+Подключение:
+```typescript
+import { JwtModule } from '@slonum/common';
+
+@Module({
+  imports: [JwtModule.register({ ACCESS_SECRET: globals()[ACCESS_SECRET]})],
+})
+export class AppModule {}
+```
+Использование:
+```typescript
+@Auth()
+@Get('me')
+getCurrentUser() {
+  // user-info
+}
+
+@Auth('ADMIN')
+@Get('secret')
+getSecretData() {
+  // секретные данные
+}
+```
+- ### Модуль Rmq. Подключение и регистрация сервисов
+Подключение:
+```typescript
+// app.module.ts
+
+// Сначала импортируем в AppModule.
+// Это необходимо, чтобы сработала инъекция ConfigService в экспортируемый RmqService
+// Делать для этого ничего не нужно, инъекция произойдет сама
+import { RmqModule } from '@slonum/common';
+
+@Module({
+  imports: [RmqModule],
+})
+export class AppModule {}
+
+// main.ts
+
+const rmqService: RmqService = app.get(RmqService);
+app.connectMicroservice(rmqService.getRmqOptions('название очереди'));
+await app.startAllMicroservices();
+```
+Регистрация сервиса:
+```typescript
+import { RmqModule } from '@slonum/common';
+
+@Module({
+  imports: [RmqModule.register({ service: 'NAME_SERVICE', queue: 'queue' })],
+})
+export class AppModule {}
+```
+В этом случае также экспортируется RmqService для подключения очереди в main.ts
+- ### Куки авторизации
+```typescript
+import { Response } from 'express';
+import { setTokenCookies } from '@slonum/common';
+
+@Post('register-participant')
+async registerParticipant(@Res() res: Response, @Body() registerParticipantDto: RegisterParticipantDto): ResponseDto {
+  const responseDto: ResponseDto = await this.participantService.registerParticipant(registerParticipantDto);
+  setTokenCookies(res, response.tokens);
+  return response; 
+}
+```
+## [Types](https://github.com/Sylvador/slonum#types-1)
 - [AuthData](https://github.com/Sylvador/slonum#authdata)
 - [AuthMetaData](https://github.com/Sylvador/slonum#authmetadata)
 - [JwtPayload](https://github.com/Sylvador/slonum#jwtpayload)
 - [JwtPayloadRT](https://github.com/Sylvador/slonum#jwtpayloadrt)
 - [Name](https://github.com/Sylvador/slonum#name)
 - [Tokens](https://github.com/Sylvador/slonum#tokens)
-## Interfaces
+## [Interfaces](https://github.com/Sylvador/slonum#interfaces-1)
 - [IProfile](https://github.com/Sylvador/slonum#iprofile)
 - [IChildProfile](https://github.com/Sylvador/slonum#ichildprofile)
 - [IParentProfile](https://github.com/Sylvador/slonum#iparentprofile)
@@ -15,7 +83,7 @@
 - [IRole](https://github.com/Sylvador/slonum#irole)
 - [IRpcException](https://github.com/Sylvador/slonum#irpcexception)
 - [IUser](https://github.com/Sylvador/slonum#iuser)
-## Enums
+## [Enums](https://github.com/Sylvador/slonum#enums-1)
 - [RegistrationSource](https://github.com/Sylvador/slonum#registrationsource)
 - [RoleEnum](https://github.com/Sylvador/slonum#roleenum)
 ## [Utils](https://github.com/Sylvador/slonum#utils-1)
@@ -24,15 +92,15 @@
 - [joinFullName](https://github.com/Sylvador/slonum#joinfullname)
 - [setTokenCookies](https://github.com/Sylvador/slonum#settokencookies)
 - [removeTokenCookies](https://github.com/Sylvador/slonum#removetokencookies)
-## Passport Strategies
+## [Passport Strategies](https://github.com/Sylvador/slonum#strategies)
 - [AtStrategy](https://github.com/Sylvador/slonum#atstrategy)
 ## Guards
 - AtGuard
 - RolesGuard
 ## Pipes
 - ValidationPipe
-## Middlewares
-- LoggerMiddleware
+## [Middlewares](https://github.com/Sylvador/slonum#middlewares-1)
+- [LoggerMiddleware](https://github.com/Sylvador/slonum#loggermiddleware-1)
 ## [Message Services](https://github.com/Sylvador/slonum#message-services-1)
 ### [BaseMessageService](https://github.com/Sylvador/slonum#basemessageservice-1)
 Базовый класс сервисов сообщений
@@ -44,14 +112,14 @@
 - ProfileModule
 - [ProfileService](https://github.com/Sylvador/slonum#profileservice-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81-%D0%B4%D0%BB%D1%8F-%D0%BE%D0%B1%D1%80%D0%B0%D1%89%D0%B5%D0%BD%D0%B8%D1%8F-%D0%BA-slonum-user-info)
 - ProfileMessagePatterns
-## Loggers
+## [Loggers](https://github.com/Sylvador/slonum#loggers-1)
 - LoggerModule
 - CustomLoggerService
 - [RpcExceptionLogger](https://github.com/Sylvador/slonum#rpcexceptionlogger)
-## ExceptionFilters
+## [Exception Filters](https://github.com/Sylvador/slonum#exception-filters-1)
 - [HttpExceptionFilter](https://github.com/Sylvador/slonum#httpexceptionlogger)
 - [RpcExceptionFilter](https://github.com/Sylvador/slonum#rpcexceptionfilter)
-## Decorators
+## [Decorators](https://github.com/Sylvador/slonum#decorators-1)
 - [Auth](https://github.com/Sylvador/slonum#auth-1)
 - [GetCurrentUser](https://github.com/Sylvador/slonum#getcurrentuser)
 - [MetaData](https://github.com/Sylvador/slonum#metadata)
@@ -199,6 +267,7 @@ export interface IUser {
   refreshTokens?: IRefreshToken[];
 }
 ```
+## Enums
 ### RegistrationSourceEnum
 ```typescript
 export enum RegistrationSource {
@@ -250,11 +319,11 @@ export function removeTokenCookies(res: Response): void {
 ```
 ## Strategies
 ### AtStrategy
-AtStrategy импортируется при регистрации CommonModule
+AtStrategy импортируется при регистрации JwtModule
 ```typescript
 @Injectable()
 export class AtStrategy extends PassportStrategy(Strategy, 'jwt') {
-  constructor(@Inject(MODULE_OPTIONS_TOKEN) { ACCESS_SECRET }: CommonModuleOptions) {
+  constructor(@Inject(JWT_OPTIONS_TOKEN) { ACCESS_SECRET }: JwtModuleOptions) {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([ExtractJwt.fromAuthHeaderAsBearerToken(), AtStrategy.extractJwtFromCookies]),
       ignoreExpiration: false,
@@ -269,15 +338,19 @@ export class AtStrategy extends PassportStrategy(Strategy, 'jwt') {
     return null;
   }
 
-  validate(payload: JwtPayload): Omit<JwtPayload, 'passwordHash'> {
-    return {
-      id: payload.id,
-      email: payload.email,
-      roles: payload.roles,
-      vkId: payload.vkId,
-      emailConfirmed: payload.emailConfirmed,
-      googleId: payload.googleId,
-    };
+  validate(payload: JwtPayload): JwtPayload {
+    return payload;
+  }
+}
+```
+## Middlewares
+### LoggerMiddleware
+Применение:
+```typescript
+@Module({})
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes('*');
   }
 }
 ```
@@ -361,6 +434,32 @@ async checkParentByChild(parentId, childId): Promise<boolean> {
     return this.profileMessageService.send({ parentId, childId }, ProfileMessagePatterns.CHECK_PARENT_BY_CHILD);
   }
 ```
+Импортирование:
+```typescript
+import { ProfileModule } from '@slonum/common';
+
+@Module({
+  imports: [ProfileModule],
+})
+export class ParticipantModule {}
+```
+Применение:
+```typescript
+import { ProfileService } from '@slonum/common';
+import { RegisterDto } from '@slonum/common';
+
+@Injectable()
+export class ParticipantService {
+  constructor(
+    private readonly profileService: ProfileService, // Зарегистрированный сервис
+  ) {}
+
+  async registerParticipant(registerDto: RegisterDto, ...rest) {
+    const registerResponseDto: RegisterResponseDto = await this.profileService.register(registerDto);
+    // Ваш код
+  }
+}
+```
 ## Loggers
 ### RpcExceptionLogger
 Логгер для ошибок в rabbit контроллерах<br>
@@ -385,7 +484,7 @@ export class RpcExceptionLogger implements RpcExceptionFilter<RpcException> {
   }
 }
 ```
-## Filters
+## Exception Filters
 ### HttpExceptionFilter
 Выводит лог в консоль и формирует ответ с сервера<br>
 ```typescript
