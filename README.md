@@ -3,6 +3,7 @@
 - ### Модуль авторизации
 Подключение:
 ```typescript
+import globals, { ACCESS_SECRET } from './config/global.config';
 import { JwtModule } from '@slonum/common';
 
 @Module({
@@ -67,6 +68,7 @@ async registerParticipant(@Res() res: Response, @Body() registerParticipantDto: 
   return response; 
 }
 ```
+# Содержимое библиотеки
 ## [Types](https://github.com/Sylvador/slonum#types-1)
 - [AuthData](https://github.com/Sylvador/slonum#authdata)
 - [AuthMetaData](https://github.com/Sylvador/slonum#authmetadata)
@@ -100,7 +102,7 @@ async registerParticipant(@Res() res: Response, @Body() registerParticipantDto: 
 ## Pipes
 - ValidationPipe
 ## [Middlewares](https://github.com/Sylvador/slonum#middlewares-1)
-- [LoggerMiddleware](https://github.com/Sylvador/slonum#loggermiddleware-1)
+- [LoggerMiddleware](https://github.com/Sylvador/slonum#loggermiddleware)
 ## [Message Services](https://github.com/Sylvador/slonum#message-services-1)
 ### [BaseMessageService](https://github.com/Sylvador/slonum#basemessageservice-1)
 Базовый класс сервисов сообщений
