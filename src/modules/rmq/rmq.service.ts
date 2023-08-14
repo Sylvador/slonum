@@ -3,10 +3,17 @@ import { ConfigService } from '@nestjs/config';
 import { Transport } from '@nestjs/microservices';
 import { CustomLoggerService } from '../../logger';
 
+/**
+ * Сервис для получения готовых настроек для подключения сервиса к rabbitmq
+ */
 @Injectable()
 export class RmqService {
   constructor(private readonly configService: ConfigService) {}
 
+  /**
+   * @param queue Название очереди
+   * @returns Опции подключения к rabbitmq
+   */
   getRmqOptions(queue: string) {
     return {
       transport: Transport.RMQ,

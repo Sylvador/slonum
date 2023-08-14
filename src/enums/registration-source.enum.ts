@@ -1,3 +1,6 @@
+/**
+ * Мероприятие, с которого регистрируется пользователь
+ */
 export enum RegistrationSource {
   MAIN = 'MAIN',
   BLOG = 'BLOG',

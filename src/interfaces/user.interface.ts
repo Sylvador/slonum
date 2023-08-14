@@ -1,6 +1,9 @@
 import { IRefreshToken } from './refresh-token.inteface';
 import { IRole } from './role.interface';
 
+/**
+ * Интерфейс сущности `User` в slonum-auth
+ */
 export interface IUser {
   id: number;
   login?: string;

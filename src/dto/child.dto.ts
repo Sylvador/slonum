@@ -2,6 +2,9 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsString, IsOptional, IsDate } from 'class-validator';
 
+/**
+ * Данные для регистрации ребёнка
+ */
 export class ChildDto {
   @ApiProperty({ description: 'Фамилия, имя ребенка', example: 'Иванова Анна', required: false })
   @IsOptional()

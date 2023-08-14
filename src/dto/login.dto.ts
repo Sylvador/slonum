@@ -1,7 +1,10 @@
 import { ApiProperty, ApiResponseProperty } from '@nestjs/swagger';
 import { IsString } from 'class-validator';
 import { AuthMetaData } from '../types';
-
+/**
+ * Данные для входа.
+ * @property `childId` - Возвращается в ответе при регистрации родителя с ребёнком.
+ */
 export class LoginDto {
   @ApiProperty({ description: 'Логин пользователя', example: 'parent@example.com' })
   @IsString()

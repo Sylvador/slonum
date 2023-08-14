@@ -10,10 +10,19 @@ import { IProvideUserRole } from './interfaces/provide-role.interface';
 import { IUpdateEmail } from './interfaces/update-email.interface';
 import { IUpdateUser } from './interfaces/update-user.interface';
 
+/**
+ * Сервис slonum-auth. На данный момент только для user-info
+ */
 @Injectable()
 export class AuthService {
   constructor(protected readonly authMessageService: AuthMessageService) {}
 
+  /**
+   * @param authData Данные User
+   * @param metaData user-agent и ip
+   * @param role Роль пользователя
+   * @returns {RegisterResponseDto} id зарегистрированного пользователя и его токены
+   */
   async register(authData: AuthData, metaData: AuthMetaData, role: RoleEnum): Promise<RegisterResponseDto> {
     return this.authMessageService.send({ authData, metaData, role }, AuthMessagePatterns.REGISTER);
   }

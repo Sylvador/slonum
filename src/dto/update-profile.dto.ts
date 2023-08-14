@@ -51,7 +51,12 @@ export class ProfileDto {
   @IsString()
   avatarUrl?: string;
 }
-
+/**
+ * @property `childId` - Нужно передать, если профиль ребёнка редактирует родитель
+ *
+ * Не рекомендуется пользоваться `authDto`.
+ * Сейчас работает редактирование User в auth по одному эндпоинту с редактированием профиля, но в будущем это нужно будет убрать
+ */
 export class UpdateProfileDto {
   @ApiProperty({ type: ProfileDto, description: 'Данные профиля', required: false })
   @IsOptional()
@@ -61,6 +66,9 @@ export class UpdateProfileDto {
   @IsOptional()
   authDto?: AuthDto;
 
+  /**
+   * Нужно передать, если профиль ребёнка редактирует родитель
+   */
   @ApiProperty({ example: 1, description: 'ID ребенка. Нужно передать, если родитель редактирует профиль ребёнка', required: false })
   @IsOptional()
   childId?: number;

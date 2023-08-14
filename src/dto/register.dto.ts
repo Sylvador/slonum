@@ -5,6 +5,13 @@ import { MIN_PASSWORD_LENGTH } from '../config/globals';
 import { RegistrationSource } from '../enums';
 import { AuthMetaData } from '../types';
 
+/**
+ * @property `metaData` - должна быть прикреплена перед отправкой запроса. Можно воспользоваться декоратором `@Metadata`
+ * @property `childDto` - передается для регистрации родителя вместе с ребёнком.
+ * Если не передан, то пользователь будет зарегистрирован как родитель
+ *
+ * Самостоятельная регистрация ребёнка не предполагается
+ */
 export class RegisterDto {
   @ApiProperty({ description: 'Email родителя', example: 'parent@example.com', required: false })
   @IsEmail({}, { message: 'Неверно указан email' })
@@ -35,6 +42,10 @@ export class RegisterDto {
   @IsOptional()
   registrationSource?: RegistrationSource;
 
+  /**
+   * Передается для регистрации родителя вместе с ребёнком.
+   * Если не передан, то пользователь будет зарегистрирован как родитель
+   */
   @ApiProperty({ type: ChildDto, description: 'Данные ребёнка', required: false })
   @IsOptional()
   childDto?: ChildDto;

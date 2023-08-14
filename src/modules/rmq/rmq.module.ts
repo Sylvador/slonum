@@ -4,6 +4,9 @@ import { RmqService } from './rmq.service';
 import { ConfigurableRmqModuleClass, RMQ_OPTIONS_TYPE } from './rmq.definition';
 import { ClientProxyFactory, Transport } from '@nestjs/microservices';
 
+/**
+ * Модуль для регистрации соединений с другими сервисами
+ */
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -15,6 +18,9 @@ import { ClientProxyFactory, Transport } from '@nestjs/microservices';
   exports: [RmqService],
 })
 export class RmqModule extends ConfigurableRmqModuleClass {
+  /**
+   * Регистрирует соединение с другим сервисом
+   */
   static register(options: typeof RMQ_OPTIONS_TYPE) {
     const providers: Provider[] = [
       {

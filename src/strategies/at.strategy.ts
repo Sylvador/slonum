@@ -5,6 +5,9 @@ import { Request } from 'express';
 import { JwtPayload } from '../types';
 import { JWT_OPTIONS_TOKEN, JwtModuleOptions } from '../modules/jwt-module/jwt.definition';
 
+/**
+ * Стратегия валидации access токена
+ */
 @Injectable()
 export class AtStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor(@Inject(JWT_OPTIONS_TOKEN) { ACCESS_SECRET }: JwtModuleOptions) {

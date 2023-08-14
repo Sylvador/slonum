@@ -69,69 +69,69 @@ async registerParticipant(@Res() res: Response, @Body() registerParticipantDto: 
 }
 ```
 # Содержимое библиотеки
-## [Types](https://github.com/Sylvador/slonum#types-1)
-- [AuthData](https://github.com/Sylvador/slonum#authdata)
-- [AuthMetaData](https://github.com/Sylvador/slonum#authmetadata)
-- [JwtPayload](https://github.com/Sylvador/slonum#jwtpayload)
-- [JwtPayloadRT](https://github.com/Sylvador/slonum#jwtpayloadrt)
-- [Name](https://github.com/Sylvador/slonum#name)
-- [Tokens](https://github.com/Sylvador/slonum#tokens)
-## [Interfaces](https://github.com/Sylvador/slonum#interfaces-1)
-- [IProfile](https://github.com/Sylvador/slonum#iprofile)
-- [IChildProfile](https://github.com/Sylvador/slonum#ichildprofile)
-- [IParentProfile](https://github.com/Sylvador/slonum#iparentprofile)
-- [IRefreshToken](https://github.com/Sylvador/slonum#irefreshtoken)
-- [IRequest](https://github.com/Sylvador/slonum#irequest)
-- [IRole](https://github.com/Sylvador/slonum#irole)
-- [IRpcException](https://github.com/Sylvador/slonum#irpcexception)
-- [IUser](https://github.com/Sylvador/slonum#iuser)
-## [Dtos](https://github.com/Sylvador/slonum#dtos-1)
-- [RegisterDto](https://github.com/Sylvador/slonum#registerdto)
-- [RegisterResponseDto](https://github.com/Sylvador/slonum#registerresponsedto)
-- [ChildDto](https://github.com/Sylvador/slonum#childdto)
-- [LoginDto](https://github.com/Sylvador/slonum#logindto)
-- [UpdateProfileDto](https://github.com/Sylvador/slonum#updateprofiledto)
-## [Enums](https://github.com/Sylvador/slonum#enums-1)
-- [RegistrationSource](https://github.com/Sylvador/slonum#registrationsource)
-- [RoleEnum](https://github.com/Sylvador/slonum#roleenum)
-## [Utils](https://github.com/Sylvador/slonum#utils-1)
+## [Types](#types-1)
+- [AuthData](#authdata)
+- [AuthMetaData](#authmetadata)
+- [JwtPayload](#jwtpayload)
+- [JwtPayloadRT](#jwtpayloadrt)
+- [Name](#name)
+- [Tokens](#tokens)
+## [Interfaces](#interfaces-1)
+- [IProfile](#iprofile)
+- [IChildProfile](#ichildprofile)
+- [IParentProfile](#iparentprofile)
+- [IRefreshToken](#irefreshtoken)
+- [IRequest](#irequest)
+- [IRole](#irole)
+- [IRpcException](#irpcexception)
+- [IUser](#iuser)
+## [Dtos](#dtos-1)
+- [RegisterDto](#registerdto)
+- [RegisterResponseDto](#registerresponsedto)
+- [ChildDto](#childdto)
+- [LoginDto](#logindto)
+- [UpdateProfileDto](#updateprofiledto)
+## [Enums](#enums-1)
+- [RegistrationSource](#registrationsource)
+- [RoleEnum](#roleenum)
+## [Utils](#utils-1)
 - ValidationException
-- [splitFullName](https://github.com/Sylvador/slonum#splitfullname)
-- [joinFullName](https://github.com/Sylvador/slonum#joinfullname)
-- [setTokenCookies](https://github.com/Sylvador/slonum#settokencookies)
-- [removeTokenCookies](https://github.com/Sylvador/slonum#removetokencookies)
-## [Passport Strategies](https://github.com/Sylvador/slonum#strategies)
-- [AtStrategy](https://github.com/Sylvador/slonum#atstrategy)
+- [splitFullName](#splitfullname)
+- [joinFullName](#joinfullname)
+- [setTokenCookies](#settokencookies)
+- [removeTokenCookies](#removetokencookies)
+## [Passport Strategies](#strategies)
+- [AtStrategy](#atstrategy)
 ## Guards
 - AtGuard
 - RolesGuard
 ## Pipes
 - ValidationPipe
-## [Middlewares](https://github.com/Sylvador/slonum#middlewares-1)
-- [LoggerMiddleware](https://github.com/Sylvador/slonum#loggermiddleware)
-## [Message Services](https://github.com/Sylvador/slonum#message-services-1)
-### [BaseMessageService](https://github.com/Sylvador/slonum#basemessageservice-1)
+## [Middlewares](#middlewares-1)
+- [LoggerMiddleware](#loggermiddleware)
+## [Message Services](#message-services-1)
+### [BaseMessageService](#basemessageservice-1)
 Базовый класс сервисов сообщений
 ### Auth
 - AuthModule
-- [AuthService](https://github.com/Sylvador/slonum#authservice-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%D1%81%D1%8F-%D0%B4%D0%BE%D0%BB%D0%B6%D0%B5%D0%BD-%D1%82%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE-%D0%B2-user-info-%D0%B8%D0%B7-%D0%B4%D1%80%D1%83%D0%B3%D0%B8%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%BE%D0%B2-%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D1%8B-%D1%81%D1%8E%D0%B4%D0%B0-%D0%BF%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%B0%D1%82%D1%8C-%D0%BD%D0%B5-%D0%B4%D0%BE%D0%BB%D0%B6%D0%BD%D1%8B)
+- [AuthService](#authservice-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%D1%81%D1%8F-%D0%B4%D0%BE%D0%BB%D0%B6%D0%B5%D0%BD-%D1%82%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE-%D0%B2-user-info-%D0%B8%D0%B7-%D0%B4%D1%80%D1%83%D0%B3%D0%B8%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%BE%D0%B2-%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D1%8B-%D1%81%D1%8E%D0%B4%D0%B0-%D0%BF%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%B0%D1%82%D1%8C-%D0%BD%D0%B5-%D0%B4%D0%BE%D0%BB%D0%B6%D0%BD%D1%8B)
 - AuthMessagePatterns
 ### UserInfo
 - ProfileModule
-- [ProfileService](https://github.com/Sylvador/slonum#profileservice-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81-%D0%B4%D0%BB%D1%8F-%D0%BE%D0%B1%D1%80%D0%B0%D1%89%D0%B5%D0%BD%D0%B8%D1%8F-%D0%BA-slonum-user-info)
+- [ProfileService](#profileservice-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81-%D0%B4%D0%BB%D1%8F-%D0%BE%D0%B1%D1%80%D0%B0%D1%89%D0%B5%D0%BD%D0%B8%D1%8F-%D0%BA-slonum-user-info)
 - ProfileMessagePatterns
-## [Loggers](https://github.com/Sylvador/slonum#loggers-1)
+## [Loggers](#loggers-1)
 - LoggerModule
 - CustomLoggerService
-- [RpcExceptionLogger](https://github.com/Sylvador/slonum#rpcexceptionlogger)
-## [Exception Filters](https://github.com/Sylvador/slonum#exception-filters-1)
-- [HttpExceptionFilter](https://github.com/Sylvador/slonum#httpexceptionlogger)
-- [RpcExceptionFilter](https://github.com/Sylvador/slonum#rpcexceptionfilter)
-## [Decorators](https://github.com/Sylvador/slonum#decorators-1)
-- [Auth](https://github.com/Sylvador/slonum#auth-1)
-- [GetJwtPayload](https://github.com/Sylvador/slonum#getjwtpayload)
-- [GetRtJwtPayload](https://github.com/Sylvador/slonum#getrtjwtpayload)
-- [MetaData](https://github.com/Sylvador/slonum#metadata)
+- [RpcExceptionLogger](#rpcexceptionlogger)
+## [Exception Filters](#exception-filters-1)
+- [HttpExceptionFilter](#httpexceptionfilter)
+- [RpcExceptionFilter](#rpcexceptionfilter)
+## [Decorators](#decorators-1)
+- [Auth](#auth-1)
+- [GetJwtPayload](#getjwtpayload)
+- [GetRtJwtPayload](#getrtjwtpayload)
+- [MetaData](#metadata)
 ## Types
 ### AuthData
 Данные сущности User в сервисе slonum-auth
@@ -736,7 +736,7 @@ export function Auth(...roles: string[]) {
   }
 ```
 ### GetJwtPayload
-Параметр `data` — ключ [JwtPayload](https://github.com/Sylvador/slonum#jwtpayload)<br>
+Параметр `data` — ключ [JwtPayload](#jwtpayload)<br>
 Возвращает декодированный токен, если не передан `data`<br>
 Возвращает значение `data` из токена, если передан
 ```typescript
@@ -749,7 +749,7 @@ export const GetJwtPayload = createParamDecorator(
 );
 ```
 ### GetRtJwtPayload
-Параметр `data` — ключ [JwtPayloadRT](https://github.com/Sylvador/slonum#jwtpayloadrt)<br>
+Параметр `data` — ключ [JwtPayloadRT](#jwtpayloadrt)<br>
 Возвращает декодированный токен, если не передан `data`<br>
 Возвращает значение `data` из токена, если передан
 ```typescript
@@ -762,7 +762,7 @@ export const GetRtJwtPayload = createParamDecorator(
 );
 ```
 ### Metadata
-Возвращает [AuthMetaData](https://github.com/Sylvador/slonum#authmetadata)
+Возвращает [AuthMetaData](#authmetadata)
 ```typescript
 export const MetaData = createParamDecorator((data: unknown, ctx: ExecutionContext): AuthMetaData => {
   const req = ctx.switchToHttp().getRequest();

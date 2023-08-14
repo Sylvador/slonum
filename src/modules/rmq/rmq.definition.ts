@@ -1,7 +1,13 @@
 import { ConfigurableModuleBuilder } from '@nestjs/common';
 
 export interface RmqOptions {
+  /**
+   * Название токена сервиса для DI
+   */
   service: string;
+  /**
+   * Название очереди
+   */
   queue: string;
 }
 
