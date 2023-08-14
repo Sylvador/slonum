@@ -1,6 +1,6 @@
 {
   "name": "@slonum/common",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "description": "backend kit",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
