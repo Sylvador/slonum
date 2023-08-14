@@ -474,7 +474,7 @@ app.useGlobalFilters(new RpcExceptionLogger());
 Применение к контроллеру
 ```typescript
 @Controller()
-@UseFilters(new RpcExceptionFilterLogger())
+@UseFilters(new RpcExceptionLogger())
 export class ProfileRabbitController
 ```
 Просто выводит логи ошибок
@@ -557,7 +557,7 @@ export function Auth(...roles: string[]) {
   @ApiCreatedResponse({ type: LoginDto, description: 'Логин и пароль ребёнка' })
   @Auth('PARENT')
   async addChild(
-    @GetCurrentUser('id') parentId: number,
+    @GetJwtPayload('id') parentId: number,
     @Body() childDto: ChildDto,
     @MetaData() metaData: AuthMetaData,
   ): Promise<LoginDto> {
@@ -569,7 +569,7 @@ export function Auth(...roles: string[]) {
   @ApiResponse({ type: Profile })
   @Auth()
   @Get()
-  async getCurrentUserById(@GetCurrentUser<JwtPayload>('id') id: number): Promise<IProfile> {
+  async getCurrentUserById(@GetJwtPayload('id') id: number): Promise<IProfile> {
     return this.profileService.getCurrentUserById(id);
   }
 ```
