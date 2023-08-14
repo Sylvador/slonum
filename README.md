@@ -414,8 +414,8 @@ async getProfileById(id: number): Promise<IProfile> {
 ```
 Получение нескольких профилей по массиву id
 ```typescript
-async getProfileById(id: number): Promise<IProfile> {
-    return this.profileMessageService.send({ id }, ProfileMessagePatterns.GET_PROFILE_BY_ID);
+async getProfilesByIds(ids: number[]): Promise<IProfile[]> {
+    return this.profileMessageService.send({ ids }, ProfileMessagePatterns.GET_PROFILES_BY_IDS);
   }
 ```
 Обновление данных профиля и User.<br>
