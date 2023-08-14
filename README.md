@@ -85,6 +85,12 @@ async registerParticipant(@Res() res: Response, @Body() registerParticipantDto: 
 - [IRole](https://github.com/Sylvador/slonum#irole)
 - [IRpcException](https://github.com/Sylvador/slonum#irpcexception)
 - [IUser](https://github.com/Sylvador/slonum#iuser)
+## [Dtos](https://github.com/Sylvador/slonum#dtos-1)
+- [RegisterDto](https://github.com/Sylvador/slonum#registerdto)
+- [RegisterResponseDto](https://github.com/Sylvador/slonum#registerresponsedto)
+- [ChildDto](https://github.com/Sylvador/slonum#childdto)
+- [LoginDto](https://github.com/Sylvador/slonum#logindto)
+- [UpdateProfileDto](https://github.com/Sylvador/slonum#updateprofiledto)
 ## [Enums](https://github.com/Sylvador/slonum#enums-1)
 - [RegistrationSource](https://github.com/Sylvador/slonum#registrationsource)
 - [RoleEnum](https://github.com/Sylvador/slonum#roleenum)
@@ -268,6 +274,162 @@ export interface IUser {
   googleId?: string;
   passwordHash?: string;
   refreshTokens?: IRefreshToken[];
+}
+```
+## Dtos
+### RegisterDto
+```typescript
+export class RegisterDto {
+  @ApiProperty({ description: 'Email родителя', example: 'parent@example.com', required: false })
+  @IsEmail({}, { message: 'Неверно указан email' })
+  @IsOptional()
+  parentEmail?: string;
+
+  @ApiProperty({ description: 'Пароль пользователя', example: 'password123' })
+  @IsString({ message: 'Должно быть строкой' })
+  @Length(MIN_PASSWORD_LENGTH, undefined, { message: `Минимальная длина - ${MIN_PASSWORD_LENGTH}` })
+  password: string;
+
+  @ApiProperty({ description: 'Фамилия, имя родителя', example: 'Иванов Иван', required: false })
+  @IsString()
+  @IsOptional()
+  parentFullName?: string;
+
+  @ApiProperty({ description: 'Город', example: 'Москва', required: false })
+  @IsString()
+  @IsOptional()
+  city?: string;
+
+  @ApiProperty({
+    description: 'Мероприятие, через которое происходит регистрация. По умолчанию будет главная страница',
+    example: RegistrationSource.OLYMPIAD,
+    required: false,
+  })
+  @IsEnum(RegistrationSource)
+  @IsOptional()
+  registrationSource?: RegistrationSource;
+
+  @ApiProperty({ type: ChildDto, description: 'Данные ребёнка', required: false })
+  @IsOptional()
+  childDto?: ChildDto;
+
+  metaData: AuthMetaData;
+}
+```
+### RegisterResponseDto
+```typescript
+export class RegisterResponseDto {
+  @ApiProperty({ description: 'id пользователя', example: 1, type: 'number ' })
+  userId?: number;
+
+  @ApiProperty({ description: 'Токены пользователя', example: { accessToken: 'accessToken', refreshToken: 'refreshToken' } })
+  tokens: Tokens;
+
+  @ApiProperty({ description: 'Данные для входа в аккаунт ребёнка', type: LoginDto, required: false })
+  childLoginDto?: LoginDto;
+}
+```
+### ChildDto
+```typescript
+export class ChildDto {
+  @ApiProperty({ description: 'Фамилия, имя ребенка', example: 'Иванова Анна', required: false })
+  @IsOptional()
+  @IsString()
+  childFullName?: string;
+
+  @ApiProperty({ description: 'Дата рождения ребенка', example: '2000-01-01T00:00:00.000Z', required: false })
+  @Type(() => Date)
+  @IsDate()
+  @IsOptional()
+  birthDate?: Date;
+
+  @ApiProperty({ description: 'Город', example: 'Москва', required: false })
+  @IsString()
+  @IsOptional()
+  city?: string;
+}
+```
+### LoginDto
+```typescript
+export class LoginDto {
+  @ApiProperty({ description: 'Логин пользователя', example: 'parent@example.com' })
+  @IsString()
+  login: string;
+
+  @ApiProperty({ description: 'Пароль пользователя', example: 'password123' })
+  @IsString()
+  password: string;
+
+  authMetaData?: AuthMetaData;
+
+  @ApiResponseProperty({ type: Number, example: 1 })
+  childId?: number;
+}
+```
+### UpdateProfileDto
+```typescript
+export class AuthDto {
+  @ApiProperty({ example: 'john_doe', description: 'Логин пользователя', required: false })
+  @IsOptional()
+  @IsString()
+  login?: string;
+
+  @ApiProperty({ example: 'old_password', description: 'Старый пароль пользователя', required: false })
+  @IsOptional()
+  @IsString()
+  oldPassword?: string;
+
+  @ApiProperty({ example: 'new_password', description: 'Новый пароль пользователя', required: false })
+  @IsOptional()
+  @IsString()
+  newPassword?: string;
+
+  @ApiProperty({ example: 'new_password', description: 'Подтверждение нового пароля', required: false })
+  @IsOptional()
+  @IsString()
+  passwordConfirm?: string;
+
+  @ApiProperty({ example: 'john@example.com', description: 'Адрес электронной почты пользователя', required: false })
+  @IsOptional()
+  @IsEmail()
+  email?: string;
+}
+
+export class ProfileDto {
+  @ApiProperty({ example: 'Иван Иванов', description: 'Полное имя пользователя', required: false })
+  @IsOptional()
+  @IsString()
+  fullName?: string;
+
+  @ApiProperty({ example: 'Нью-Йорк', description: 'Город проживания пользователя', required: false })
+  @IsOptional()
+  @IsString()
+  city?: string;
+
+  @ApiProperty({ example: '1990-01-01', description: 'Дата рождения пользователя', required: false })
+  @IsOptional()
+  @IsDate()
+  @Type(() => Date)
+  birthDate?: Date;
+
+  @ApiProperty({ example: 'https://example.com/avatar.jpg', description: 'URL аватара пользователя', required: false })
+  @IsOptional()
+  @IsString()
+  avatarUrl?: string;
+}
+
+export class UpdateProfileDto {
+  @ApiProperty({ type: ProfileDto, description: 'Данные профиля', required: false })
+  @IsOptional()
+  profileDto?: ProfileDto;
+
+  @ApiProperty({ type: AuthDto, description: 'Данные авторизации', required: false })
+  @IsOptional()
+  authDto?: AuthDto;
+
+  @ApiProperty({ example: 1, description: 'ID ребенка. Нужно передать, если родитель редактирует профиль ребёнка', required: false })
+  @IsOptional()
+  childId?: number;
 }
 ```
 ## Enums
