@@ -9,6 +9,7 @@ import { RefreshTokenDto } from './dto/refresh-token.dto';
 import { IProvideUserRole } from './interfaces/provide-role.interface';
 import { IUpdateEmail } from './interfaces/update-email.interface';
 import { IUpdateUser } from './interfaces/update-user.interface';
+import { OAuthLogin } from '../../interfaces/oauth-login.interface';
 
 /**
  * Сервис slonum-auth. На данный момент только для user-info
@@ -27,8 +28,8 @@ export class AuthService {
     return this.authMessageService.send({ authData, metaData, role }, AuthMessagePatterns.REGISTER);
   }
 
-  async oAuthLogin(email: string, metaData: AuthMetaData): Promise<Tokens> {
-    return this.authMessageService.send({ email, metaData }, AuthMessagePatterns.OAUTH_LOGIN);
+  async oAuthLogin(user: OAuthLogin): Promise<Tokens> {
+    return this.authMessageService.send(user, AuthMessagePatterns.OAUTH_LOGIN);
   }
 
   async logout(refreshToken: string): Promise<number> {
