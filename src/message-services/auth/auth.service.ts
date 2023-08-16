@@ -28,7 +28,7 @@ export class AuthService {
     return this.authMessageService.send({ authData, metaData, role }, AuthMessagePatterns.REGISTER);
   }
 
-  async oAuthLogin(user: OAuthLogin): Promise<Tokens> {
+  async oAuthLogin(user: OAuthLogin): Promise<{ tokens: Tokens; userId: number }> {
     return this.authMessageService.send(user, AuthMessagePatterns.OAUTH_LOGIN);
   }
 
