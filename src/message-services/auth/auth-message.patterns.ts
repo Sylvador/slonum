@@ -13,4 +13,5 @@ export enum AuthMessagePatterns {
   UPDATE_EMAIL = 'updateEmail',
   UPDATE_PASSWORD = 'updatePassword',
   FIND_ONE_BY_ID = 'findOneById',
+  OAUTH_LOGIN = 'OAUTH_LOGIN',
 }

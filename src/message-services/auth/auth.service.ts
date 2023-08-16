@@ -27,6 +27,10 @@ export class AuthService {
     return this.authMessageService.send({ authData, metaData, role }, AuthMessagePatterns.REGISTER);
   }
 
+  async oAuthLogin(email: string, metaData: AuthMetaData): Promise<Tokens> {
+    return this.authMessageService.send({ email, metaData }, AuthMessagePatterns.OAUTH_LOGIN);
+  }
+
   async logout(refreshToken: string): Promise<number> {
     return this.authMessageService.send({ refreshToken }, AuthMessagePatterns.LOGOUT);
   }
