@@ -12,7 +12,7 @@ import { JWT_OPTIONS_TOKEN, JwtModuleOptions } from '../modules/jwt-module/jwt.d
 export class AtStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor(@Inject(JWT_OPTIONS_TOKEN) { ACCESS_SECRET }: JwtModuleOptions) {
     super({
-      jwtFromRequest: ExtractJwt.fromExtractors([ExtractJwt.fromAuthHeaderAsBearerToken(), AtStrategy.extractJwtFromCookies]),
+      jwtFromRequest: ExtractJwt.fromExtractors([AtStrategy.extractJwtFromCookies, ExtractJwt.fromAuthHeaderAsBearerToken()]),
       ignoreExpiration: false,
       secretOrKey: ACCESS_SECRET || 'ACCESS_SECRET',
     });
