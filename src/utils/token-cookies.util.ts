@@ -5,8 +5,8 @@ import { Tokens } from '../types';
  * Установка jwt токенов в куки
  */
 export function setTokenCookies(res: Response, tokens: Tokens): void {
-  res.cookie('access_token', tokens.accessToken, { httpOnly: true, sameSite: 'strict', secure: true });
-  res.cookie('refresh_token', tokens.refreshToken);
+  res.cookie('access_token', tokens.accessToken, { secure: true, domain: '.slonum.ru' });
+  res.cookie('refresh_token', tokens.refreshToken, { secure: true, domain: '.slonum.ru' });
 }
 
 /**
