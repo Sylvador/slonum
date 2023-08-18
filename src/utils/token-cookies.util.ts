@@ -1,12 +1,12 @@
-import { Response } from 'express';
+import { CookieOptions, Response } from 'express';
 import { Tokens } from '../types';
 
 /**
  * Установка jwt токенов в куки
  */
-export function setTokenCookies(res: Response, tokens: Tokens): void {
-  res.cookie('access_token', tokens.accessToken, { secure: true, domain: '.slonum.ru' });
-  res.cookie('refresh_token', tokens.refreshToken, { secure: true, domain: '.slonum.ru' });
+export function setTokenCookies(res: Response, tokens: Tokens, cookieOptions?: CookieOptions): void {
+  res.cookie('access_token', tokens.accessToken, { secure: true, domain: '.slonum.ru', ...cookieOptions });
+  res.cookie('refresh_token', tokens.refreshToken, { secure: true, domain: '.slonum.ru', ...cookieOptions });
 }
 
 /**
