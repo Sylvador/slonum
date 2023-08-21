@@ -6,7 +6,7 @@ import { Tokens } from '../types';
  */
 export function setTokenCookies(res: Response, tokens: Tokens, cookieOptions?: CookieOptions): void {
   res.cookie('access_token', tokens.accessToken, { secure: true, domain: '.slonum.ru', ...cookieOptions });
-  res.cookie('refresh_token', tokens.refreshToken, { secure: true, domain: '.slonum.ru', ...cookieOptions });
+  res.cookie('refresh_token', tokens.refreshToken, { secure: true, httpOnly: true, domain: '.slonum.ru', ...cookieOptions });
 }
 
 /**
