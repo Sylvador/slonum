@@ -5,6 +5,7 @@ import { RegistrationSource } from '../enums/registration-source.enum';
  * Следует использовать, когда неизвестно точно чей профиль будет в объекте или когда это просто неважно.
  */
 export interface IProfile {
+  id: number;
   firstName?: string;
   lastName?: string;
   fullName?: string;
