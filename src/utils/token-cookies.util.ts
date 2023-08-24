@@ -12,7 +12,7 @@ export function setTokenCookies(res: Response, tokens: Tokens, cookieOptions?: C
 /**
  * Удаление jwt токенов из куки
  */
-export function removeTokenCookies(res: Response): void {
-  res.clearCookie('access_token');
-  res.clearCookie('refresh_token');
+export function removeTokenCookies(res: Response, cookieOptions?: CookieOptions): void {
+  res.clearCookie('access_token', { domain: '.slonum.ru', ...cookieOptions });
+  res.clearCookie('refresh_token', { domain: '.slonum.ru', ...cookieOptions });
 }
