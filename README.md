@@ -57,6 +57,44 @@ export class AppModule {}
 ```
 В этом случае также экспортируется RmqService для подключения очереди в main.ts
 - ### Куки авторизации
+env для дева
+```env
+CORS_ORIGIN_CONFIG=".slonum.ru$
+localhost"
+```
+env для прода
+```env
+CORS_ORIGIN_CONFIG=".slonum.ru$"
+```
+Устанавливаем cookie-parser
+```bash
+npm i cookie-parser
+```
+Подключаем его
+```typescript
+// main.ts
+import * as cookieParser from 'cookie-parser';
+
+// Настраиваем cors
+const configService: ConfigService = app.get(ConfigService);
+  const origin: RegExp[] = configService
+    .get<string>('CORS_ORIGIN_CONFIG')
+    ?.split('\n')
+    .map((item: string): RegExp => new RegExp(item));
+  if (!origin) logger.warn('Не удалось прочитать CORS_ORIGIN_CONFIG');
+  app.enableCors({ origin, credentials: true });
+// Подключаем куки в свагере
+const config = new DocumentBuilder()
+    .setTitle('Authentication')
+    .setDescription('Here we can find all API methods of Authentication')
+    .setVersion(configService.get<string>('npm_package_version'))
+    .addCookieAuth()
+    .build();
+
+// Подключаем парсер к сервису
+app.use(cookieParser())
+```
+Установка куки
 ```typescript
 import { Response } from 'express';
 import { setTokenCookies } from '@slonum/common';
@@ -67,6 +105,14 @@ async registerParticipant(@Res() res: Response, @Body() registerParticipantDto: 
   setTokenCookies(res, response.tokens);
   return response; 
 }
+```
+При необходимости третьим аргументом можно передать `CookieOptions`
+```typescript
+setTokenCookies(res, tokens, { ...cookieOptions })
+```
+Настройка кук для локалхоста
+```typescript
+setTokenCookies(res, tokens, { domain: null })
 ```
 # Содержимое библиотеки
 ## [Types](#types-1)
