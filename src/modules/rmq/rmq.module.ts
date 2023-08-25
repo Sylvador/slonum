@@ -2,7 +2,7 @@ import { Module, Provider } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { RmqService } from './rmq.service';
 import { ConfigurableRmqModuleClass, RMQ_OPTIONS_TYPE } from './rmq.definition';
-import { ClientProxyFactory, Transport } from '@nestjs/microservices';
+import { ClientProxyFactory, RmqOptions, Transport } from '@nestjs/microservices';
 
 /**
  * Модуль для регистрации соединений с другими сервисами
@@ -28,11 +28,14 @@ export class RmqModule extends ConfigurableRmqModuleClass {
         useFactory: (configService: ConfigService) => {
           return ClientProxyFactory.create({
             transport: Transport.RMQ,
+            ...options.extras,
             options: {
               urls: [configService.get<string>('RMQ_URL') || 'amqp://localhost:5672'],
               queue: options.queue,
+              ...options.extras?.options,
               queueOptions: {
                 durable: false,
+                ...options.extras?.options?.queueOptions,
               },
             },
           });

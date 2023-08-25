@@ -55,7 +55,22 @@ import { RmqModule } from '@slonum/common';
 })
 export class AppModule {}
 ```
-В этом случае также экспортируется RmqService для подключения очереди в main.ts
+В этом случае также экспортируется RmqService для подключения очереди в main.ts.<br>
+Также можно перенастроить дефолтные опции
+```typescript
+export interface SimplifiedRmqOptions {
+  /**
+   * Название токена сервиса для DI
+   */
+  service: string;
+  /**
+   * Название очереди
+   */
+  queue: string;
+
+  extras?: RmqOptions;
+}
+```
 - ### Куки авторизации
 env для дева
 ```env
